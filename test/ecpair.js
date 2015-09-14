@@ -19,24 +19,26 @@ for (var networkName in NETWORKS) {
   NETWORKS_LIST.push(NETWORKS[networkName])
 }
 
+var ONE = new Buffer('0000000000000000000000000000000000000000000000000000000000000001', 'hex')
+
 describe('ECPair', function () {
   describe('constructor', function () {
     it('defaults to compressed', function () {
-      var keyPair = new ECPair(BigInteger.ONE)
+      var keyPair = new ECPair(ONE)
 
-      assert.strictEqual(keyPair.compressed, true)
+      assert.strictEqual(keyPair.__compressed, true)
     })
 
     it('supports the uncompressed option', function () {
-      var keyPair = new ECPair(BigInteger.ONE, null, {
+      var keyPair = new ECPair(ONE, null, {
         compressed: false
       })
 
-      assert.strictEqual(keyPair.compressed, false)
+      assert.strictEqual(keyPair.__compressed, false)
     })
 
     it('supports the network option', function () {
-      var keyPair = new ECPair(BigInteger.ONE, null, {
+      var keyPair = new ECPair(ONE, null, {
         compressed: false,
         network: NETWORKS.testnet
       })
